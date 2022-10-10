@@ -1,6 +1,6 @@
-const express = require('express');
+const { Router } = require('express');
 
-const userRouter = express.Router();
+const userRouter = Router();
 
 userRouter.get('/', (req, res) => {
     console.log(req.query);
