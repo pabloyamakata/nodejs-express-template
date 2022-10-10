@@ -1,15 +1,10 @@
 const { Router } = require('express');
+const { getUsers, getUser } = require('../controllers/user.controller.js');
 
 const userRouter = Router();
 
-userRouter.get('/', (req, res) => {
-    console.log(req.query);
-    res.send(`Requested resource at ${req.url}`);
-});
+userRouter.get('/', getUsers);
 
-userRouter.get('/:user', (req, res) => {
-    const user = req.params.user;
-    res.send(`Requested resource at ${req.url}. Get user: ${user}`);
-});
+userRouter.get('/:user', getUser);
 
 module.exports = userRouter;
