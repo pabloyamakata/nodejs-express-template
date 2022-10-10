@@ -1,6 +1,7 @@
 const express = require('express');
-const app = express();
 const userRouter = require('./routes/user.routes.js');
+
+const app = express();
 
 app.get('/', (req, res) => {
     res.send(`Requested resource at ${req.url}`);
