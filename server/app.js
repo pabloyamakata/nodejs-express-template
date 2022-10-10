@@ -1,5 +1,4 @@
 const express = require('express');
-const dbConnect = require('./config/db.js');
 const app = express();
 
 const userRouter = require('./routers/user.js');
@@ -14,5 +13,3 @@ const PORT = process.env.PORT || 3001;
 app.listen(PORT, () => {
     console.log(`Server running at http://localhost:${PORT}...`);
 });
-
-dbConnect();
