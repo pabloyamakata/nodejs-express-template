@@ -1,10 +1,10 @@
-const mysql = require('mysql2');
+const { createConnection } = require('mysql2');
 
-const db = mysql.createConnection({
+const conn = createConnection({
     host: 'localhost',
     user: 'root',
     password: '',
     database: 'nodejs-express-template'
 });
 
-module.exports = db;
+module.exports = conn;
