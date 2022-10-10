@@ -1,12 +1,12 @@
 const express = require('express');
 const app = express();
-
-const userRouter = require('./routes/users.js');
-app.use('/api/users', userRouter);
+const userRouter = require('./routes/user.js');
 
 app.get('/', (req, res) => {
     res.send(`Requested resource at ${req.url}`);
 });
+
+app.use('/api/users', userRouter);
 
 const PORT = process.env.PORT || 3001;
 
