@@ -1,11 +1,20 @@
+const conn = require('../config/conn.js');
+
 const getUsers = (req, res) => {
-    console.log(req.query);
-    res.send(`Requested resource at ${req.url}`);
+    const sql = 'SELECT * FROM users';
+    conn.query(sql, (err, users) => {
+        if(err) throw err;
+        res.send(users);
+    });
 };
 
 const getUser = (req, res) => {
     const user = req.params.user;
-    res.send(`Requested resource at ${req.url}. Get user: ${user}`);
+    const sql = 'SELECT * FROM users WHERE id = ?';
+    conn.execute(sql, [user], (err, user) => {
+        if(err) throw err;
+        res.send(user);
+    });
 };
 
 module.exports = {
