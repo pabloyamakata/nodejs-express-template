@@ -4,7 +4,7 @@
   "description": "Server template with Node.js and Express",
   "main": "app.js",
   "scripts": {
-    "dev": "nodemon app",
+    "dev": "nodemon src/app",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "Pablo Yamakata",
