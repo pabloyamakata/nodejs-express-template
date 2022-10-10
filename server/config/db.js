@@ -7,11 +7,4 @@ const db = mysql2.createConnection({
     database: 'nodejs-express-template'
 });
 
-const dbConnect = () => {
-    db.connect(err => {
-        if(err) throw err;
-        else console.log('Connection was successful');
-    });
-};
-
-module.exports = dbConnect;
+module.exports = db;
