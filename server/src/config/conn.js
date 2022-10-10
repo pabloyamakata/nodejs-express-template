@@ -4,7 +4,7 @@ const conn = createConnection({
     host: 'localhost',
     user: 'root',
     password: '',
-    database: 'nodejs-express-template'
+    database: 'nodejs_express_template'
 });
 
 module.exports = conn;
