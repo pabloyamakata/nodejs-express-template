@@ -9,6 +9,12 @@ app.get('/', (req, res) => {
 
 app.use('/api/users', userRouter);
 
+app.use((req, res, next) => {
+    res.status(404).json({
+        message: 'Endpoint not found'
+    });
+});
+
 const PORT = process.env.PORT || 3001;
 
 app.listen(PORT, () => {
