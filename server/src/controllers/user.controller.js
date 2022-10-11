@@ -9,9 +9,18 @@ const getUsers = (req, res) => {
 };
 
 const getUser = (req, res) => {
-    const user = req.params.user;
+    const id = req.params.id;
     const sql = 'SELECT * FROM users WHERE id = ?';
-    conn.execute(sql, [user], (err, user) => {
+    conn.execute(sql, [id], (err, user) => {
+        if(err) throw err;
+        res.send(user);
+    });
+};
+
+const createUser = (req, res) => {
+    const { username, email, password } = req.body;
+    const sql = 'INSERT INTO users (username, email, password) VALUES (?, ?, ?)';
+    conn.execute(sql, [username, email, password], (err, user) => {
         if(err) throw err;
         res.send(user);
     });
@@ -19,5 +28,6 @@ const getUser = (req, res) => {
 
 module.exports = {
     getUsers,
-    getUser
+    getUser,
+    createUser
 };
