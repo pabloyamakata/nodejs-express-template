@@ -26,8 +26,29 @@ const createUser = (req, res) => {
     });
 };
 
+const updateUser = (req, res) => {
+    const id = req.params.id;
+    const { username, email, password } = req.body;
+    const sql = 'UPDATE users SET username = ?, email = ?, password = ? WHERE id = ?';
+    conn.execute(sql, [username, email, password, id], (err, result) => {
+        if(err) throw err;
+        res.send(result);
+    });
+};
+
+const deleteUser = (req, res) => {
+    const id = req.params.id;
+    const sql = 'DELETE FROM users WHERE id = ?';
+    conn.execute(sql, [id], (err, result) => {
+        if(err) throw err;
+        res.send(result);
+    });
+};
+
 module.exports = {
     getUsers,
     getUser,
-    createUser
+    createUser,
+    updateUser,
+    deleteUser
 };
