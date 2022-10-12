@@ -1,6 +1,5 @@
 const express = require('express');
 const userRouter = require('./routes/user.routes.js');
-const { PORT } = require('./config/env.js');
 
 const app = express();
 
@@ -16,6 +15,4 @@ app.use((req, res, next) => {
     });
 });
 
-app.listen(PORT, () => {
-    console.log(`Server running at http://localhost:${PORT}...`);
-});
+module.exports = app;
