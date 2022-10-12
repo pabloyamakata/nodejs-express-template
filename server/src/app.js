@@ -1,5 +1,6 @@
 const express = require('express');
 const userRouter = require('./routes/user.routes.js');
+const { PORT } = require('./config/env.js');
 
 const app = express();
 
@@ -14,8 +15,6 @@ app.use((req, res, next) => {
         message: 'Endpoint not found'
     });
 });
-
-const PORT = process.env.PORT || 3001;
 
 app.listen(PORT, () => {
     console.log(`Server running at http://localhost:${PORT}...`);
