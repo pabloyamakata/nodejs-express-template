@@ -3,6 +3,8 @@ const userRouter = require('./routes/user.routes.js');
 
 const app = express();
 
+app.use(express.json());
+
 app.get('/', (req, res) => {
     res.send(`Requested resource at ${req.url}`);
 });
