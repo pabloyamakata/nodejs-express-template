@@ -32,7 +32,7 @@ const getUser = (req, res) => {
 const createUser = (req, res) => {
     const { username, email, password } = req.body;
     const sql = 'INSERT INTO users (username, email, password) VALUES (?, ?, ?)';
-    conn.execute(sql, [username, email, password], (err, user) => {
+    conn.execute(sql, [username, email, password], (err, result) => {
         
         if(err) {
             return res.status(500).json({
@@ -40,7 +40,7 @@ const createUser = (req, res) => {
             });
         }
 
-        res.send(user);
+        res.send(result);
     });
 };
 
