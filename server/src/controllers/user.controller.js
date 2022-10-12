@@ -47,7 +47,7 @@ const createUser = (req, res) => {
 const updateUser = (req, res) => {
     const id = req.params.id;
     const { username, email, password } = req.body;
-    const sql = 'UPDATE users SET username = ?, email = ?, password = ? WHERE id = ?';
+    const sql = 'UPDATE users SET username = IFNULL(?, username), email = IFNULL(?, email), password = IFNULL(?, password) WHERE id = ?';
     conn.execute(sql, [username, email, password, id], (err, result) => {
         
         if(err) {
