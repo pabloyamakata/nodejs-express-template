@@ -1,6 +1,6 @@
 const app = require('./app.js');
 const { PORT } = require('./config/env.js');
-const { sequelize } = require('./config/sequelize.js');
+const sequelize = require('./config/sequelize.js');
 
 const index = async () => {
     try {
