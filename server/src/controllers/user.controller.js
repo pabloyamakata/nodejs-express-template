@@ -44,8 +44,8 @@ const updateUser = async (req, res) => {
     try {
         const user = await User.findByPk(id);
         user.username = username;
-        username.email = email;
-        username.password = password;
+        user.email = email;
+        user.password = password;
         await user.save();
 
         res.json(user);
@@ -64,7 +64,7 @@ const deleteUser = async (req, res) => {
             }
         });
 
-        res.status(204);
+        res.sendStatus(204);
     } catch(err) {
         return res.status(500).json({ message: err.message });
     }
