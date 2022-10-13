@@ -1,11 +1,9 @@
-const { createConnection } = require('mysql2');
-const { DB_HOST, DB_USER, DB_PASSWORD, DB_NAME } = require('./env.js');
+const Sequelize = require('sequelize');
+const { DB_HOST, DB_USER, DB_PASSWORD, DB_NAME, DB_DIALECT } = require('./env.js');
 
-const conn = createConnection({
+const sequelize = new Sequelize(DB_NAME, DB_USER, DB_PASSWORD, {
     host: DB_HOST,
-    user: DB_USER,
-    password: DB_PASSWORD,
-    database: DB_NAME
+    dialect: DB_DIALECT
 });
 
-module.exports = conn;
+module.exports = sequelize;

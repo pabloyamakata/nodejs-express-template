@@ -1,83 +1,89 @@
-const conn = require('../config/conn.js');
+const { User } = require('../models/User.model.js');
+const { Post } = require('../models/Post.model.js');
 
-const getUsers = (req, res) => {
-    const sql = 'SELECT * FROM users';
-    conn.query(sql, (err, users) => {
-
-        if(err) {
-            return res.status(500).json({
-                message: 'Something went wrong'
-            });
-        }
-
-        res.send(users);
-    });
+const getUsers = async (req, res) => {
+    try {
+        const users = await User.findAll();
+        res.json(users);
+    } catch(err) {
+        return res.status(500).json({ message: err.message });
+    }
 };
 
-const getUser = (req, res) => {
-    const id = req.params.id;
-    const sql = 'SELECT * FROM users WHERE id = ?';
-    conn.execute(sql, [id], (err, user) => {
-        
-        if(err) {
-            return res.status(500).json({
-                message: 'Something went wrong'
-            });
-        }
+const getUser = async (req, res) => {
+    const { id } = req.params;
 
-        res.send(user);
-    });
+    try {
+        const user = await User.findByPk(id);
+        res.json(user);
+    } catch(err) {
+        return res.status(500).json({ message: err.message });
+    }
 };
 
-const createUser = (req, res) => {
+const createUser = async (req, res) => {
     const { username, email, password } = req.body;
-    const sql = 'INSERT INTO users (username, email, password) VALUES (?, ?, ?)';
-    conn.execute(sql, [username, email, password], (err, result) => {
-        
-        if(err) {
-            return res.status(500).json({
-                message: 'Something went wrong'
-            });
-        }
-
-        res.send(result);
-    });
+    
+    try {
+        const user = await User.create({
+            username,
+            email,
+            password
+        });
+    
+        res.json(user);
+    } catch(err) {
+        return res.status(500).json({ message: err.message });
+    }
 };
 
-const updateUser = (req, res) => {
-    const id = req.params.id;
-    let { username, email, password } = req.body;
+const updateUser = async (req, res) => {
+    const { id } = req.params;
+    const { username, email, password } = req.body;
 
-    username === undefined && (username = null);
-    email === undefined && (email = null);
-    password === undefined && (password = null);
+    try {
+        const user = await User.findByPk(id);
+        user.username = username;
+        username.email = email;
+        username.password = password;
+        await user.save();
 
-    const sql = 'UPDATE users SET username = IFNULL(?, username), email = IFNULL(?, email), password = IFNULL(?, password) WHERE id = ?';
-    conn.execute(sql, [username, email, password, id], (err, result) => {
-        
-        if(err) {
-            return res.status(500).json({
-                message: 'Something went wrong'
-            });
-        }
-
-        res.send(result);
-    });
+        res.json(user);
+    } catch(err) {
+        return res.status(500).json({ message: err.message });
+    }
 };
 
-const deleteUser = (req, res) => {
-    const id = req.params.id;
-    const sql = 'DELETE FROM users WHERE id = ?';
-    conn.execute(sql, [id], (err, result) => {
+const deleteUser = async (req, res) => {
+    const { id } = req.params;
 
-        if(err) {
-            return res.status(500).json({
-                message: 'Something went wrong'
-            });
-        }
+    try {
+        await User.destroy({
+            where: {
+                id
+            }
+        });
 
-        res.send(result);
-    });
+        res.status(204);
+    } catch(err) {
+        return res.status(500).json({ message: err.message });
+    }
+};
+
+const getUserPosts = async (req, res) => {
+    const { id } = req.params;
+
+    try {
+        const posts = await Post.findAll({
+            where: {
+                userId: id
+            }
+        });
+
+        res.json(posts);
+    } catch(err) {
+        return res.status(500).json({ message: err.message });
+    }
 };
 
 module.exports = {
@@ -85,5 +91,6 @@ module.exports = {
     getUser,
     createUser,
     updateUser,
-    deleteUser
+    deleteUser,
+    getUserPosts
 };
