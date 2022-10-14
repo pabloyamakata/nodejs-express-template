@@ -1,5 +1,6 @@
-const User = require('../models/User.model.js');
-const Post = require('../models/Post.model.js');
+const { validationResult } = require('express-validator');
+const User = require('../models/user.model.js');
+const Post = require('../models/post.model.js');
 
 const getUsers = async (req, res) => {
     try {
@@ -22,6 +23,12 @@ const getUser = async (req, res) => {
 };
 
 const createUser = async (req, res) => {
+    const errors = validationResult(req);
+
+    if(!errors.isEmpty()) {
+        return res.status(400).json({ errors: errors.array() });
+    }
+    
     const { username, email, password } = req.body;
     
     try {
