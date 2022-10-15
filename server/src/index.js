@@ -6,7 +6,7 @@ const index = async () => {
     try {
         await sequelize.sync({ force: false });
         app.listen(PORT);
-        console.log(`Server running at http://localhost:${PORT}...`);
+        console.log(`Server running on http://localhost:${PORT}...`);
     } catch(err) {
         console.log(err);
     }
