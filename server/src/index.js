@@ -1,6 +1,6 @@
-const app = require('./app.js');
-const { PORT } = require('./config/env.js');
-const sequelize = require('./config/sequelize.js');
+import app from './app.js';
+import { PORT } from './config/env.js';
+import sequelize from './config/sequelize.js';
 
 const index = async () => {
     try {

@@ -1,6 +1,6 @@
-const { Router } = require('express');
-const userValidator = require('../validators/user.validator.js');
-const { getUsers, getUser, createUser, updateUser, deleteUser, getUserPosts } = require('../controllers/user.controller.js');
+import { Router } from 'express';
+import userValidator from '../validators/user.validator.js';
+import { getUsers, getUser, createUser, updateUser, deleteUser, getUserPosts } from '../controllers/user.controller.js';
 
 const userRouter = Router();
 
@@ -12,4 +12,4 @@ userRouter.delete('/:id', deleteUser);
 
 userRouter.get('/:id/posts', getUserPosts)
 
-module.exports = userRouter;
+export default userRouter;

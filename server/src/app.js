@@ -1,6 +1,6 @@
-const express = require('express');
-const userRouter = require('./routes/user.routes.js');
-const postRouter = require('./routes/post.routes.js');
+import express from 'express';
+import userRouter from './routes/user.routes.js';
+import postRouter from './routes/post.routes.js';
 
 const app = express();
 
@@ -19,4 +19,4 @@ app.use((req, res, next) => {
     });
 });
 
-module.exports = app;
+export default app;

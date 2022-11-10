@@ -1,6 +1,6 @@
-const Post = require('../models/post.model.js');
+import Post from '../models/post.model.js';
 
-const getPosts = async (req, res) => {
+export const getPosts = async (req, res) => {
     try {
         const posts = await Post.findAll();
         res.json(posts);
@@ -9,7 +9,7 @@ const getPosts = async (req, res) => {
     }
 };
 
-const getPost = async (req, res) => {
+export const getPost = async (req, res) => {
     const { id } = req.params;
 
     try {
@@ -20,7 +20,7 @@ const getPost = async (req, res) => {
     }
 };
 
-const createPost = async (req, res) => {
+export const createPost = async (req, res) => {
     const { title, body, isDraft, userId } = req.body;
 
     try {
@@ -37,7 +37,7 @@ const createPost = async (req, res) => {
     }
 };
 
-const updatePost = async (req, res) => {
+export const updatePost = async (req, res) => {
     const { id } = req.params;
 
     try {
@@ -50,7 +50,7 @@ const updatePost = async (req, res) => {
     }
 };
 
-const deletePost = async (req, res) => {
+export const deletePost = async (req, res) => {
     const { id } = req.params;
 
     try {
@@ -64,12 +64,4 @@ const deletePost = async (req, res) => {
     } catch(err) {
         return res.status(500).json({ message: err.message });
     }
-};
-
-module.exports = {
-    getPosts,
-    getPost,
-    createPost,
-    updatePost,
-    deletePost
 };

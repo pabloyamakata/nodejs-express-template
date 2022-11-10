@@ -1,6 +1,6 @@
-const { DataTypes } = require('sequelize');
-const sequelize = require('../config/sequelize.js');
-const Post = require('./post.model.js');
+import { DataTypes } from 'sequelize';
+import sequelize from '../config/sequelize.js';
+import Post from './post.model.js';
 
 const User = sequelize.define('users', {
     id: {
@@ -30,4 +30,4 @@ Post.belongsTo(User, {
     targetId: 'id'
 });
 
-module.exports = User;
+export default User;

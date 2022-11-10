@@ -1,4 +1,4 @@
-const { check } = require('express-validator');
+import { check } from 'express-validator';
 
 const userValidator = [
     check('username')
@@ -22,4 +22,4 @@ const userValidator = [
         .withMessage('Password must be at least 8 characters long and contain 1 lowercase letter, 1 uppercase letter, 1 number and 1 symbol')
 ];
 
-module.exports = userValidator;
+export default userValidator;

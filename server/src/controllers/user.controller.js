@@ -1,8 +1,8 @@
-const { validationResult } = require('express-validator');
-const User = require('../models/user.model.js');
-const Post = require('../models/post.model.js');
+import { validationResult } from 'express-validator';
+import User from '../models/user.model.js';
+import Post from '../models/post.model.js';
 
-const getUsers = async (req, res) => {
+export const getUsers = async (req, res) => {
     try {
         const users = await User.findAll();
         res.json(users);
@@ -11,7 +11,7 @@ const getUsers = async (req, res) => {
     }
 };
 
-const getUser = async (req, res) => {
+export const getUser = async (req, res) => {
     const { id } = req.params;
 
     try {
@@ -22,7 +22,7 @@ const getUser = async (req, res) => {
     }
 };
 
-const createUser = async (req, res) => {
+export const createUser = async (req, res) => {
     const errors = validationResult(req);
 
     if(!errors.isEmpty()) {
@@ -44,7 +44,7 @@ const createUser = async (req, res) => {
     }
 };
 
-const updateUser = async (req, res) => {
+export const updateUser = async (req, res) => {
     const { id } = req.params;
     const { username, email, password } = req.body;
 
@@ -61,7 +61,7 @@ const updateUser = async (req, res) => {
     }
 };
 
-const deleteUser = async (req, res) => {
+export const deleteUser = async (req, res) => {
     const { id } = req.params;
 
     try {
@@ -77,7 +77,7 @@ const deleteUser = async (req, res) => {
     }
 };
 
-const getUserPosts = async (req, res) => {
+export const getUserPosts = async (req, res) => {
     const { id } = req.params;
 
     try {
@@ -91,13 +91,4 @@ const getUserPosts = async (req, res) => {
     } catch(err) {
         return res.status(500).json({ message: err.message });
     }
-};
-
-module.exports = {
-    getUsers,
-    getUser,
-    createUser,
-    updateUser,
-    deleteUser,
-    getUserPosts
 };
